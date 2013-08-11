@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Big Bang</title>
+	<style>
+		html{
+			background-color: white;
+		}
+		body {
+			text-align: center;
+			width: 520px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		canvas {
+			margin: 15px;
+			position: relative;
+		}
+
+		.button{
+			background-color: #0000AA;
+			color: #0099FF;
+			padding-top: 2px;
+			font: 16px monospace;
+			height: 20px;
+			text-align: center;
+		}
+
+		#startButton{
+			width: 60px;
+			display: inline-block;
+		}
+
+		#stateButton{
+			width: 70px;
+			display: none;
+		}
+
+		#stateButtonTwo {
+			width: 85px;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="500"></canvas>
+	<script src="dom_functions.js"></script>
+	<script src="map.js"></script>
+	<script src="vector.js"></script>
+	<script src="particle.js"></script>
+	<script src="particle_system.js"></script>
+	<script src="attractor.js"></script>
+	<script src="main.js"></script>
+	<div id="startButton" class="button" onclick="setup();">START</div>
+	<div id="stateButton" class="button" onclick="setState(st);">CHANGE</div>
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+</body>
