@@ -1,11 +1,12 @@
 function particle(loc, acc, mass_) {
   this.mass = mass_;
-  this.location = new vec(loc.x, loc.y);
+  this.location = loc;
   this.velocity = new vec(0, 0);
-  this.acceleration = new vec(acc.x, acc.y);
-  this.lifeSpan = 2000;
+  this.acceleration = acc;
+  this.lifeSpan = 255;
   this.dead = false;
   this.r=0, this.g=0, this.b=0;
+  this.counter = 1;
 
   this.applyForce = function (force_) {
     var force = new vec(force_.x, force_.y);
@@ -22,9 +23,13 @@ function particle(loc, acc, mass_) {
   this.setRandomColour();
 
   this.draw = function(){
+    this.velocity = this.velocity.add(this.acceleration);
+    this.location = this.location.add(this.velocity);
+    this.acceleration = this.acceleration.mult(0);
+
     ctx.beginPath();
-    ctx.fillStyle = "rgba(" + this.r+","+255+","+255+"," + map(this.lifeSpan,0,255,0,1) + ")";
-    ctx.arc(this.location.x, this.location.y, this.mass, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba("+this.r+","+this.g+","+this.b+"," + map(this.lifeSpan,0,255,0,1)+")";
+    ctx.arc(this.location.x, this.location.y, this.mass, 0, Math.PI*2);
     ctx.fill();
   };
 }

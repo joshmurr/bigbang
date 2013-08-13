@@ -1,57 +1,32 @@
 function particleSystem(origin_) {
-  var origin = new vec(origin_.x, origin_.y);
+  this.origin = origin_;
   this.constantLimit = 100;
   this.limit = this.constantLimit;
-  this.particles = [];
-  this.forces = [], this.attractors = [];
-  this.full = false;
-  this.finished = false;
-  this.deathToll = 0;
+  this.particles = [], this.forces = [], this.attractors = [];
+  this.finished = false, this.deathToll = 0;
+  this.counter = 1;
 
   this.addBatchParticles = function () {
     for (var i = 0; i < this.limit; i++) {
-      this.particles.unshift(new particle(origin, new vec((Math.random() * 4) - 2, (Math.random() * 4) - 2), 5));
+      this.particles.unshift(new particle(this.origin, new vec((Math.random() * 4) - 2, (Math.random() * 4) - 2), 5));
     }
   };
 
-  this.addParticles = function (loc_) {
+  this.addParticles = function () {
     if (this.limit === 0) {
-      this.full = true;
       return;
     } else {
-      this.particles.unshift(new particle(origin, new vec((Math.random() * 10) - 5, (Math.random() * 10) - 5), Math.random()*10));
+      this.particles.unshift(new particle(this.origin, new vec((Math.random() * 10) - 5, (Math.random() * 10) - 5), Math.random()*10));
       this.limit--;
     }
   };
 
-  this.updateParticles = function (p_) {
-    var p = p_;
-
-    for(var i=0; i<this.forces.length; i++){
-      p.applyForce(this.forces[i]);
-    }
-
-    for(var j=0; j<this.attractors.length; j++){
-      p.applyForce(this.attractors[j].attract(p));
-      this.attractors[j].draw();
-    }
-
-    //p.applyForce(att.attract(p));
-
-    this.bounceOffEdges(p);
-
-    p.velocity = p.velocity.add(p.acceleration);
-    p.location = p.location.add(p.velocity);
-    p.acceleration = p.acceleration.mult(0);
-
-    p.lifeSpan-=0.5;
-
-    if (p.lifeSpan <= 1) {
-      p.dead = true;
-    } else {
-      p.dead = false;
-    }
-
+  this.outOfBounds = function(p){
+    if (p.location.x < p.mass) p.lifeSpan-=5;
+    else if (p.location.x > w - p.mass) p.lifeSpan-=5;
+    else if (p.location.y < p.mass) p.lifeSpan-=5;
+    else if (p.location.y > h - p.mass) p.lifeSpan-=5;
+    else p.lifeSpan = 255;
   };
 
   this.bounceOffEdges = function(p){
@@ -71,24 +46,33 @@ function particleSystem(origin_) {
     }
   };
 
-  this.applyForce = function(force){
-    this.forces.push(force);
-  }
-
-  this.drawParticles = function (p_) {
-    var p = p_;
-    p.draw();
-  };
-
   this.run = function () {
+    
     for (var i = 0; i < this.particles.length; i++) {
       var p = this.particles[i];
-      this.updateParticles(p);
-      this.drawParticles(p);
+      for (var k = 0; k < this.forces.length; k++) {
+        p.applyForce(this.forces[k]);
+      }
+  
+      for (var j = 0; j < this.attractors.length; j++) {
+        p.applyForce(this.attractors[j].attract(p));
+        this.attractors[j].draw();
+      }
+
+      this.outOfBounds(p);
+  
+      if (p.lifeSpan <= 1) {
+        p.dead = true;
+      } else {
+        p.dead = false;
+      }
+
+      p.draw();
+
       if (p.dead) {
         this.deathToll++;
         this.particles.splice(i, 1);
-        if(this.deathToll == this.constantLimit){
+        if (this.deathToll == this.constantLimit) {
           this.finished = true;
         }
       }
@@ -103,12 +87,8 @@ function addParticleSystemMouse(e) {
   x -= can.offsetLeft;
   y -= can.offsetTop;
 
-  var origin = new vec(x, y);
-  systems.unshift(new particleSystem(origin));
-}
-
-function addParticleSystem(loc) {
-  systems.unshift(new particleSystem(loc));
+  var mOrigin = new vec(x, y);
+  systems.unshift(new particleSystem(mOrigin));
 }
 
 function updateParticleSystem() {
@@ -117,6 +97,8 @@ function updateParticleSystem() {
     if(ps.finished){
       systems.splice(i, 1);
     } else {
+      ctx.fillStyle = "red";
+      ctx.fillRect(ps.origin.x,ps.origin.y, 3,3);
       ps.addParticles();
       ps.run();
     }

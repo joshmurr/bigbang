@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JSBB Devlog</title>
+	<link rel="stylesheet" type="text/css" href="journal/ss.css"></link>
+	<script>
+		function startTime(){
+			var today=new Date();
+			var h=today.getHours();
+			var m=today.getMinutes();
+			var s=today.getSeconds();
+			// add a zero in front of numbers<10
+			m=checkTime(m);
+			s=checkTime(s);
+			document.getElementById('date').innerHTML=h+":"+m+":"+s;
+			t=setTimeout(function(){startTime()},500);
+		}
+			
+		function checkTime(i){
+			if (i<10){
+			  i="0" + i;
+			}
+		return i;
+		}
+	</script>
+</head>
+<body onload="startTime()">
+	<div id="main">
+		<h1>Big Bang Devlog</h1>
+		<p id="date"></p>
+		<!-- ENTRY 5 -->
+		<h2>5. Fixed &mdash; <time datetime="2013-08-14T00:31:31">14.08.13 &mdash; 00:31:31</time></h2>
+		<p class="entry">I didn't sleep on it, I fucking fixed it. The problem was issues with <a href="https://sites.google.com/a/elixirtech.com/wiki/repertoire/report/working-with-scripts/additionandconcatenation" alt="addition and concatenation">addition and concatenation</a>. The values stored in the JSON are stored as strings, which naturally get concatenated, so they need to be converted to integers before they can be treated as integers. Of course it was a simple fix which didn't even require a single extra line of code. Now to back-track and repair all the extra damage I've done...<br><br>Josh</p>
+		<!---->
+
+		<!-- ENTRY 4 -->
+		<h2>4. Bug &mdash; <time datetime="2013-08-14T00:06:12">14.08.13 &mdash; 00:06:12</time></h2>
+		<p class="entry">This is a quick note to say what was a week or so of gradual progression, I have now reached my first major obstacle in the form of a bug. A bug which is making my console look like this:</p>
+		<img src="journal/img/04.png" alt="fuuuuu-">
+		<p class="entry">I can't for the life of me figure out what is causing it. I have been putting console.log()'s in all over the place, re-arranging functions, re-writing the vector object and other shit but I can't seem to fix it. At some point it is turning a simple round number into NaN (Not a Numer). I'll sleep on it.<br><br>Josh</p>
+		<!---->
+
+		<!-- ENTRY 3 -->
+		<h2>3. Structure &mdash; <time datetime="2013-08-12T19:18:07">12.08.13 &mdash; 19:18:07</time></h2>
+		<p class="entry">Particles are no long contrained to the canvas itself and can fly on and off the visible area&mdash;this will allow me to make the visible area full-screen. If the particle is off-screen it's "lifeSpan" begins to decrease (yet to spawn a new particle on it's death however). Now I must consider the order of states the particles will go through:
+		<br><br><img src="journal/img/03.png" alt="Particle states">
+		The particles will undergo change in:</p>
+		<ul>
+			<li>Force</li>
+			<li>Attraction to one-another - on/off</li>
+			<li>Colour</li>
+			<li>Size</li>
+		</ul>
+		<p class="entry">All these attributes will be stored in the JSON object/file and called upon for each state change.	The text to be overlaid will also be in the JSON object but I will return to this later.
+		<br><br>
+		Josh
+		</p>
+		<!---->
+
+		<!-- ENTRY 2 -->
+		<h2>2. Where I Am Now &mdash; <time datetime="2013-08-12T13:06:44">12.08.13 &mdash; 13:06:44</time></h2>
+		<p class="entry">The idea for this project was to return to a video I made which was an attempt to explain the Big Bang to be displayed on the moving-image posters found alongside the escalators on the London Underground:
+		<br><br>
+		<iframe src="http://player.vimeo.com/video/66117077" width="100%" height="702" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+		<br><br>
+		The particles systems in this case were made in Processing, exported frame-by-frame and then recomposed in After Effects with text. I have since learnt a lot more in the way of web-development and so for this project I decided to try and recreate the same series of particle effects but in real-time with added interactive elements using Javascript and HTML5.
+		<br><br>
+		Progress has been reasonable and developments have been made daily. Currently the particle systems work efficiently and I can manipulate the forces applied (gravity, points of attraction, etc.). To gain a level of interaction I would like the forces to change but the particles to remain, rather than creating a new set of particles for each stage in the explanation&mdash;to create smoother transitions and to make it more fun to click through. In the picture below you can see that one of two forces can be added by clicking the buttons.
+		<br>
+		<img src="journal/img/01.png" alt="Clickable forces">
+		<br>
+		Now, I am beginning to added state-by-state transitions which click through one-by-one. The 'Change' button progresses to the next state. All states will be held in a JSON file, each state holding a list of forces to be applied, location and strength of attractors/repellors and so on. This means the particles currently on the canvas can be kept.
+		<br>
+		<img src="journal/img/02.png" alt="Click through states">
+		<br>Josh</p>
+		<!---->
+		
+		<!-- ENTRY 1 -->
+		<h2>1. Development Log &mdash; <time datetime="2013-08-12T12:58:32">12.08.13 &mdash; 12:58:32</time></h2>
+		<p class="entry">I have decided to document the development of this project on this develpoment log from now on. Working on an exclusively digital project means having a sketchbook to return to every-so-often hinders the speed at which I can work. To fully document the process I want to refer to research material and use imagery, and to print, cut and stick such things is time consuming. Although it has taken me an hour to get this how I want it to look and behave, I feel the time saved will get me that hour back and more. This is also something which can be turned into a physical object at the end of the project.<br><br>Josh</p>
+		<!---->
+	</div>
+	
+	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+</body>
+</html>

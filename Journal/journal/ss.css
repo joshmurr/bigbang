@@ -1,0 +1,72 @@
+@font-face{
+	font-family: AGL;
+	src: url('AGL.otf');
+}
+
+@font-face{
+	font-family: AGLI;
+	src: url('AGLI.otf');
+}
+
+*{
+	padding: 0px;
+	margin: 0px;
+}
+
+html{
+	background-color: black;
+}
+
+#main{
+	padding: 10px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	width: 580px;
+	background-color: #FFFF73;
+	color: black;
+}
+
+h1 {
+	font: 3em AGL, "Lucida Sans Console", sans-serif;
+}
+
+h2{
+	padding-top: 20px;
+	text-align: left;
+	font: 1.5em AGLI;
+}
+
+.entry{
+	text-align: left;
+	padding-top: 20px;
+	line-height: 1.32em;
+}
+
+p {
+	font: 1.5em AGL;
+}
+
+img {
+	width: 100%;
+}
+ul{
+	list-style-type: none;
+	list-style-position: inside;
+	padding: 10px;
+	padding-left: 30px;
+}
+
+ul li{
+	text-align: left;
+	font: 1.2em AGLI;
+}
+a{
+	color: #000;
+	text-decoration: none;
+	text-shadow: -1px 1px #FFF;
+}
+a:hover{
+	color: #FF0;
+}
+

@@ -1,6 +1,5 @@
 var can = document.getElementById("canvas");
 var ctx = can.getContext("2d");
-//can.addEventListener("mousedown", addParticleSystemMouse, false);
 
 var w = can.width, h = can.height;
 var gravity = new vec(0, 10);
@@ -10,68 +9,82 @@ var friction = 0.98;
 var wind = new vec(0.15, 0);
 var systems = [];
 var att = new attractor(new vec(w/2, h/2));
-var st = 0;
+var st = 0, count = 0;
 
 var states = {
 	"states":[
-	    {"forceList": [
+	    {"emitters": [
+	    	{
+	    		"draw": "true",
+	    		"x": "251",
+	    		"y": "251"
+	    	}
+	    ],
+		"forceList": [
 	        {
+	        	"add": "false",
 	            "x": "0",
-	            "y": "1"
-	        },
-	        {
-	            "x": "-0.1",
-	            "y": "-0.05"
+	            "y": "0"
 	        }
 	    ],
 	    "attractors": [
 	    	{
-	    		"x": "350",
-	    		"y": "400",
-	    		"mass": "2",
+	    		"add": "true",
+	    		"x": "250",
+	    		"y": "250",
+	    		"mass": "5",
 	    		"G": "500"
-	    	},
-	    	{
-	    		"x": "200",
-	    		"y": "200",
-	    		"mass": "10",
-	    		"G": "300"
 	    	}
 	    ]},
 	
-		{"forceList": [
+		{"emitters": [
+	    	{
+	    		"draw": "true",
+	    		"x": "400",
+	    		"y": "400"
+	    	}
+	    ],
+		"forceList": [
 	        {
-	            "x": "-1",
-	            "y": "0"
-	        },
-	        {
-	            "x": "0.5",
+	        	"add": "true",
+	            "x": "0.1",
 	            "y": "0"
 	        }
 	    ],
 	    "attractors": [
 	    	{
-	    		"x": "10",
-	    		"y": "90",
-	    		"mass": "1",
+	    		"add": "true",
+	    		"x": "50",
+	    		"y": "50",
+	    		"mass": "5",
 	    		"G": "200"
 	    	},
 	    	{
-	    		"x": "500",
+	    		"add": "true",
+	    		"x": "450",
 	    		"y": "450",
-	    		"mass": "8",
-	    		"G": "900"
+	    		"mass": "5",
+	    		"G": "200"
 	    	}
 	    ]},
 
-	    {"forceList": [
+	    {"emitters": [
+	    	{
+	    		"draw": "false",
+	    		"x": "0",
+	    		"y": "0"
+	    	}
+	    ],
+	    "forceList": [
 	        {
+	        	"add": "false",
 	            "x": "0",
 	            "y": "10"
 	        }
 	    ],
 	    "attractors": [
 	    	{
+	    		"add": "false",
 	    		"x": "0",
 	    		"y": "0",
 	    		"mass": "0",
@@ -82,15 +95,19 @@ var states = {
 	]
 }
 
-function setState(num){
+function setState(){
 	//CLEAR FORCES
 	for(var s=0; s<systems.length; s++){
 		systems[s].forces = [];
 		systems[s].attractors = [];
 	}
 
-	var s = states.states[num];
-	console.log("Current State: " + num)
+	var s = states.states[st];
+	console.log("Current State: " + st);
+	this.addParticleSystem = function(psLoc){
+		systems.unshift(new particleSystem(psLoc));
+	}
+
 	this.addForce = function(force){
 		for(var i=0; i<systems.length; i++){
 			systems[i].forces.push(force);
@@ -103,21 +120,32 @@ function setState(num){
 		}
 	}
 	
+	for(var l=0; l<s.emitters.length; l++){
+		if(s.emitters[l].draw == "false") {
+			break;
+		}
+		else {
+			var psl = new vec(+s.emitters[l].x,+s.emitters[l].y);
+			this.addParticleSystem(psl);
+		}
+	}
 
 	for(var j=0; j<s.forceList.length; j++){
-		this.addForce(new vec(s.forceList[j].x, s.forceList[j].y));
+		if(s.forceList.add == "false") break;
+		else this.addForce(new vec(+s.forceList[j].x, +s.forceList[j].y));
 	}
 
 	for(var k=0; k<s.attractors.length; k++){
 		var att = s.attractors[k];
-		this.addAttractor(new attractor(new vec(att.x, att.y), att.mass, att.G));
+		if(att.add == "false") break;
+		else this.addAttractor(new attractor(new vec(+att.x, +att.y), +att.mass, +att.G));
 	}
-	st++;
+	if(st<states.states.length-1) st++;
+	else return;
 }
 
 function setup(){
 	hide("startButton");
-	addParticleSystem(center);
 	setState(st);
 	show("stateButton");
 }
@@ -126,6 +154,8 @@ function draw() {
   ctx.fillStyle = "black";
   ctx.fillRect(0, 0, w, h);
   updateParticleSystem();
+  //if(systems.length>0 && count % 100 === 0) console.log(systems[0].particles[0].location.x);
+  //count++;
   console.log(systems.length);
 }
 
