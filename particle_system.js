@@ -1,6 +1,6 @@
-function particleSystem(origin_) {
+function particleSystem(origin_, numParts) {
   this.origin = origin_;
-  this.constantLimit = 100;
+  this.constantLimit = numParts;
   this.limit = this.constantLimit;
   this.particles = [], this.forces = [], this.attractors = [];
   this.finished = false, this.deathToll = 0;
@@ -47,7 +47,6 @@ function particleSystem(origin_) {
   };
 
   this.run = function () {
-    
     for (var i = 0; i < this.particles.length; i++) {
       var p = this.particles[i];
       for (var k = 0; k < this.forces.length; k++) {

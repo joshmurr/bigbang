@@ -33,18 +33,35 @@ h1 {
 
 h2{
 	padding-top: 20px;
+	padding-bottom: 20px;
 	text-align: left;
 	font: 1.5em AGLI;
+	text-decoration: overline;
+}
+
+h3{
+	font: 1.5em AGLI;
+	display: inline-block;
+	padding: 5px;
 }
 
 .entry{
 	text-align: left;
-	padding-top: 20px;
+	padding-top: 0px;
 	line-height: 1.32em;
+
 }
 
 p {
 	font: 1.5em AGL;
+}
+
+#about {
+	display: none;
+}
+
+em{
+	font: 1.05em AGLI;
 }
 
 img {
@@ -65,6 +82,10 @@ a{
 	color: #000;
 	text-decoration: none;
 	text-shadow: -1px 1px #FFF;
+}
+
+#codeLink{
+	text-shadow: none;
 }
 a:hover{
 	color: #FF0;
