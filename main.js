@@ -6,9 +6,11 @@ var center = new vec(w/4,h/2);
 var friction = 0.98;
 var systems = [];
 var st = 0, count = 0;
+var lastLoop = new Date;
 
 var states = {
 	"states":[
+	//ONE//////////////////////////////
 	    {"emitters": [
 	    	{
 	    		"draw": "true",
@@ -29,46 +31,46 @@ var states = {
 	    		"add": "true",
 	    		"x": "250",
 	    		"y": "250",
-	    		"mass": "5",
+	    		"mass": "1000000",
 	    		"G": "500"
 	    	}
 	    ]},
-	
+	//TWO//////////////////////////////
 		{"emitters": [
 	    	{
 	    		"draw": "true",
-	    		"numParts": "50",
-	    		"x": "400",
-	    		"y": "400"
+	    		"numParts": "100",
+	    		"x": "250",
+	    		"y": "250"
 	    	}
 	    ],
 		"forceList": [
 	        {
-	        	"add": "true",
-	            "x": "0.1",
+	        	"add": "false",
+	            "x": "0",
 	            "y": "0"
 	        }
 	    ],
 	    "attractors": [
 	    	{
-	    		"add": "true",
+	    		"add": "false",
 	    		"x": "50",
 	    		"y": "50",
 	    		"mass": "5",
 	    		"G": "200"
 	    	},
 	    	{
-	    		"add": "true",
+	    		"add": "false",
 	    		"x": "450",
 	    		"y": "450",
 	    		"mass": "5",
 	    		"G": "200"
 	    	}
 	    ]},
-
+	    //THREE//////////////////////////
 	    {"emitters": [
 	    	{
-	    		"draw": "true",
+	    		"draw": "false",
 	    		"numParts": "100",
 	    		"x": "100",
 	    		"y": "100"
@@ -84,8 +86,8 @@ var states = {
 	    "attractors": [
 	    	{
 	    		"add": "true",
-	    		"x": "250",
-	    		"y": "250",
+	    		"x": "100",
+	    		"y": "100",
 	    		"mass": "5",
 	    		"G": "200"
 	    	}
@@ -109,7 +111,7 @@ function setState(){
 			break;
 		} else {
 			var ps = s.emitters[b];
-			systems.unshift(new particleSystem(new vec(+ps.x,+ps.y), +ps.numParts));
+			systems.push(new particleSystem(new vec(+ps.x,+ps.y), +ps.numParts));
 		}
 	}
 
@@ -138,6 +140,13 @@ function setState(){
 	else return;
 }
 
+function appendValsToHtml(){
+	for(var i=0; i<systems.length; i++){
+		document.getElementById("s"+i).innerHTML = "System: " + i;
+		document.getElementById("pl"+i).innerHTML = "Particle Count: " + systems[i].particles.length;
+	}
+}
+
 function setup(){
 	hide("startButton");
 	setState(st);
@@ -145,12 +154,17 @@ function setup(){
 }
 
 function draw() {
-  ctx.fillStyle = "black";
-  ctx.fillRect(0, 0, w, h);
-  updateParticleSystem();
-  //if(systems.length>0 && count % 100 === 0) console.log(systems[0].particles[0].location.x);
-  //count++;
-  console.log(systems.length);
+	var thisLoop = new Date;
+	var fps = Math.floor(1000/(thisLoop - lastLoop));
+  	ctx.fillStyle = "black";
+ 	ctx.fillRect(0, 0, w, h);
+ 	updateParticleSystem();
+ 	appendValsToHtml();
+ 	//if(systems.length>0 && count % 100 === 0) console.log(systems[0].particles[0].location.x);
+ 	//count++;
+ 	console.log(systems.length);
+ 	document.getElementById("fps").innerHTML = "FPS: " + fps;
+ 	lastLoop = thisLoop;
 }
 
 setInterval(draw, 30);

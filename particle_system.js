@@ -1,10 +1,13 @@
-function particleSystem(origin_, numParts) {
+function particleSystem(id, origin_, numParts) {
+  //MAYBE ADD 'LIMITER' BOOLEAN TO PARTICLE SYSTEM
+  //IF(LIMITER) LIMIT NUMS
+  //ELSE ADDPARTICLES();
   this.origin = origin_;
   this.constantLimit = numParts;
   this.limit = this.constantLimit;
   this.particles = [], this.forces = [], this.attractors = [];
   this.finished = false, this.deathToll = 0;
-  this.counter = 1;
+  this.currentState = id;
 
   this.addBatchParticles = function () {
     for (var i = 0; i < this.limit; i++) {
@@ -12,12 +15,17 @@ function particleSystem(origin_, numParts) {
     }
   };
 
-  this.addParticles = function () {
-    if (this.limit === 0) {
-      return;
+  this.addParticles = function(maintain) {
+    //Currently says: if NOT state 2, then limit the number of parts emitted
+    if(maintain !== 1) {
+      if (this.limit === 0) {
+        return;
+      } else {
+        this.particles.push(new particle(this.origin, new vec((Math.random() * 10) - 5, (Math.random() * 10) - 5), (Math.random()*10)+2));
+        this.limit--;
+      }
     } else {
-      this.particles.unshift(new particle(this.origin, new vec((Math.random() * 10) - 5, (Math.random() * 10) - 5), Math.random()*10));
-      this.limit--;
+        this.particles.push(new particle(this.origin, new vec((Math.random() * 10) - 5, (Math.random() * 10) - 5), (Math.random()*10)+2));
     }
   };
 
@@ -49,13 +57,14 @@ function particleSystem(origin_, numParts) {
   this.run = function () {
     for (var i = 0; i < this.particles.length; i++) {
       var p = this.particles[i];
+
       for (var k = 0; k < this.forces.length; k++) {
         p.applyForce(this.forces[k]);
       }
   
       for (var j = 0; j < this.attractors.length; j++) {
         p.applyForce(this.attractors[j].attract(p));
-        this.attractors[j].draw();
+        //this.attractors[j].draw();
       }
 
       this.outOfBounds(p);
@@ -71,7 +80,10 @@ function particleSystem(origin_, numParts) {
       if (p.dead) {
         this.deathToll++;
         this.particles.splice(i, 1);
-        if (this.deathToll == this.constantLimit) {
+        //this.addParticles();
+        //if (this.deathToll == this.constantLimit) {
+        if(this.particles.length === 0) {
+          console.log("FIN");
           this.finished = true;
         }
       }
@@ -94,11 +106,12 @@ function updateParticleSystem() {
   for (var i = 0; i < systems.length; i++) {
     var ps = systems[i];
     if(ps.finished){
+      //console.log("SYSTEM " + i + " IS DEAD");
       systems.splice(i, 1);
     } else {
       ctx.fillStyle = "red";
       ctx.fillRect(ps.origin.x,ps.origin.y, 3,3);
-      ps.addParticles();
+      ps.addParticles(i);
       ps.run();
     }
   }

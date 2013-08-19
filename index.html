@@ -17,6 +17,12 @@
 			position: relative;
 		}
 
+		p {
+			font: 12px sans-serif;
+			float: left;
+			display: inline-block;
+		}
+
 		.button{
 			background-color: #0000AA;
 			color: #0099FF;
@@ -40,6 +46,11 @@
 			width: 85px;
 			display: none;
 		}
+
+		#fps{
+			float: left;
+			
+		}
 	</style>
 </head>
 <body>
@@ -52,6 +63,13 @@
 	<script src="attractor.js"></script>
 	<script src="main.js"></script>
 	<div id="startButton" class="button" onclick="setup();">START</div>
-	<div id="stateButton" class="button" onclick="setState(st);">CHANGE</div>
+	<div id="stateButton" class="button" onclick="setState(st);">CHANGE</div><br>
+	<p id="fps"></p><br>
+	<p id="s0"></p>
+	<p id="pl0"></p><br>
+	<p id="s1"></p>
+	<p id="pl1"></p><br>
+	<p id="s2"></p>
+	<p id="pl2"></p>
 	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </body>
