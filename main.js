@@ -111,7 +111,7 @@ function setState(){
 			break;
 		} else {
 			var ps = s.emitters[b];
-			systems.push(new particleSystem(new vec(+ps.x,+ps.y), +ps.numParts));
+			systems.push(new particleSystem(new vec(+ps.x,+ps.y), + ps.numParts));
 		}
 	}
 

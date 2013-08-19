@@ -1,8 +1,8 @@
-function particle(loc_, acc, mass_) {
+function particle(loc_, acc_, mass_) {
   this.mass = mass_;
-  this.loc = loc_;
+  this.location = loc_;
   this.velocity = new vec(0, 0);
-  this.acceleration = acc;
+  this.acceleration = acc_;
   this.lifeSpan = 255;
   this.dead = false;
   this.r=0, this.g=0, this.b=0;
@@ -24,12 +24,12 @@ function particle(loc_, acc, mass_) {
 
   this.draw = function(){
     this.velocity = this.velocity.add(this.acceleration);
-    this.loc = this.loc.add(this.velocity);
+    this.location = this.location.add(this.velocity);
     this.acceleration = this.acceleration.mult(0);
 
     ctx.beginPath();
     ctx.fillStyle = "rgba("+this.r+","+this.g+","+this.b+"," + map(this.lifeSpan,0,255,0,1)+")";
-    ctx.arc(this.loc.x, this.loc.y, this.mass, 0, Math.PI*2);
+    ctx.arc(this.location.x, this.location.y, this.mass, 0, Math.PI*2);
     ctx.fill();
   };
 }

@@ -1,4 +1,4 @@
-function particleSystem(id, origin_, numParts) {
+function particleSystem(origin_, numParts) {
   //MAYBE ADD 'LIMITER' BOOLEAN TO PARTICLE SYSTEM
   //IF(LIMITER) LIMIT NUMS
   //ELSE ADDPARTICLES();
@@ -7,7 +7,7 @@ function particleSystem(id, origin_, numParts) {
   this.limit = this.constantLimit;
   this.particles = [], this.forces = [], this.attractors = [];
   this.finished = false, this.deathToll = 0;
-  this.currentState = id;
+  //this.currentState = id;
 
   this.addBatchParticles = function () {
     for (var i = 0; i < this.limit; i++) {
