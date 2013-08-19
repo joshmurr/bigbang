@@ -14,6 +14,7 @@ var states = {
 	    {"emitters": [
 	    	{
 	    		"draw": "true",
+	    		"keepEmitting": "false",
 	    		"numParts": "1",
 	    		"x": "251",
 	    		"y": "251"
@@ -39,6 +40,7 @@ var states = {
 		{"emitters": [
 	    	{
 	    		"draw": "true",
+	    		"keepEmitting": "true",
 	    		"numParts": "100",
 	    		"x": "250",
 	    		"y": "250"
@@ -71,6 +73,7 @@ var states = {
 	    {"emitters": [
 	    	{
 	    		"draw": "false",
+	    		"keepEmitting": "false",
 	    		"numParts": "100",
 	    		"x": "100",
 	    		"y": "100"
@@ -111,7 +114,7 @@ function setState(){
 			break;
 		} else {
 			var ps = s.emitters[b];
-			systems.push(new particleSystem(new vec(+ps.x,+ps.y), + ps.numParts));
+			systems.push(new particleSystem(new vec(+ps.x,+ps.y), +ps.numParts, ps.keepEmitting));
 		}
 	}
 

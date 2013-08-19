@@ -1,4 +1,4 @@
-function particleSystem(origin_, numParts) {
+function particleSystem(origin_, numParts, ke_) {
   //MAYBE ADD 'LIMITER' BOOLEAN TO PARTICLE SYSTEM
   //IF(LIMITER) LIMIT NUMS
   //ELSE ADDPARTICLES();
@@ -6,8 +6,7 @@ function particleSystem(origin_, numParts) {
   this.constantLimit = numParts;
   this.limit = this.constantLimit;
   this.particles = [], this.forces = [], this.attractors = [];
-  this.finished = false, this.deathToll = 0;
-  //this.currentState = id;
+  this.finished = false, this.deathToll = 0, this.keepEmitting = ke_;
 
   this.addBatchParticles = function () {
     for (var i = 0; i < this.limit; i++) {
@@ -16,16 +15,19 @@ function particleSystem(origin_, numParts) {
   };
 
   this.addParticles = function(maintain) {
-    //Currently says: if NOT state 2, then limit the number of parts emitted
-    if(maintain !== 1) {
+    if(this.keepEmitting == "false") {
       if (this.limit === 0) {
         return;
       } else {
-        this.particles.push(new particle(this.origin, new vec((Math.random() * 10) - 5, (Math.random() * 10) - 5), (Math.random()*10)+2));
+        this.particles.push(new particle(this.origin, new vec((Math.random() * 10) - 5, (Math.random() * 10) - 5), (Math.random()*6)+2));
         this.limit--;
       }
     } else {
-        this.particles.push(new particle(this.origin, new vec((Math.random() * 10) - 5, (Math.random() * 10) - 5), (Math.random()*10)+2));
+        if(this.particles.length >= this.limit){
+          return;
+        } else {
+          this.particles.push(new particle(this.origin, new vec((Math.random() * 10) - 5, (Math.random() * 10) - 5), (Math.random()*6)+2));
+      }
     }
   };
 

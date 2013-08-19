@@ -38,6 +38,12 @@
 		<h3 id="aboutBtn">About</h3><h3><a href="http://github.com/joshmurr/bigbang/" alt="Code" id="codeLink">Code</a></h3>
 		<p class="entry" id="about"><br>I am trying to build a small web-application to explain the <a href="http://en.wikipedia.org/wiki/Big_Bang" alt="Wiki: Big Bang">Big Bang</a> through simple interactive and animated particle systems.<br><br>It is largely an experiment in Javascript and HTML5 for <a href="http://www.joshmurr.co.uk/" alt="JM">me</a>, transferring some concepts originally learnt in <a href="http://processing.org/" alt="Processing">Processing</a>.</p>
 		<p id="date"></p>
+
+		<!-- ENTRY 7 -->
+		<h2>7. Checking In &mdash; <time datetime="2013-08-19T23:33:49">19.08.13 &mdash; 23:33:49</time></h2>
+		<img src="journal/img/06.png" alt="Constant flow"><p class="entry">This is largely me procrastinating. It's been a few days since I've updated this and little has changed really. I am getting better at identifying and fixing bugs in code which is good. But it's reached a stage where development is slow. However, the click-through state system is starting to work well. Each state does hold relevant information as I wanted it to and the click-through updates the current particles on screen. I am starting to realise the code is quite badly written and for it to be a truly efficient and speedy web-app the code will likely need a full overhaul. I'll see the project through and perhaps that can be Part II.<br><br>Josh</p>
+		<!---->
+
 		<!-- ENTRY 6 -->
 		<h2>6. To Do &mdash; <time datetime="2013-08-14T12:38:52">14.08.13 &mdash; 12:38:52</time></h2>
 		<img src="journal/img/05.png" alt="Loads"><p class="entry">After the hours wasted fixing such a small problem last night, I feel like now I need to bear such things in mind. One such thing is optimisation. This is an application (or whatever it is) which is to be displayed and used in a web browser which <em>has</em> to run in real time&mdash;so dealing with potentially thousands of particles each behaving independantly will mean a lot of calculations the browser needs to perform per frame (currently at 30 frames per second). The above image shows 20 separate particle systems each dealing with 100 particles = 2000 particles. This particular example slowed the browser down considerably. Things to bear in mind:</p>
