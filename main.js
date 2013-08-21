@@ -11,6 +11,7 @@ var lastLoop = new Date;
 var states = {
 	"states":[
 	//ONE//////////////////////////////
+	/* Single jittering particle */
 	    {"emitters": [
 	    	{
 	    		"draw": "true",
@@ -32,16 +33,17 @@ var states = {
 	    		"add": "true",
 	    		"x": "250",
 	    		"y": "250",
-	    		"mass": "1000000",
-	    		"G": "500"
+	    		"mass": "500000",
+	    		"G": "5000000"
 	    	}
 	    ]},
 	//TWO//////////////////////////////
+	/* Lots of emitting particles */
 		{"emitters": [
 	    	{
 	    		"draw": "true",
 	    		"keepEmitting": "true",
-	    		"numParts": "100",
+	    		"numParts": "50",
 	    		"x": "250",
 	    		"y": "250"
 	    	}
@@ -60,16 +62,64 @@ var states = {
 	    		"y": "50",
 	    		"mass": "5",
 	    		"G": "200"
-	    	},
+	    	}
+	    ]},
+	//THREE/////////////////////////////
+	/* Switch to Blue/Red */
+	    {"emitters": [
+	    	{
+	    		"draw": "false",
+	    		"keepEmitting": "false",
+	    		"numParts": "100",
+	    		"x": "100",
+	    		"y": "100"
+	    	}
+	    ],
+	    "forceList": [
+	        {
+	        	"add": "false",
+	            "x": "0",
+	            "y": "10"
+	        }
+	    ],
+	    "attractors": [
 	    	{
 	    		"add": "false",
-	    		"x": "450",
-	    		"y": "450",
+	    		"x": "100",
+	    		"y": "100",
 	    		"mass": "5",
 	    		"G": "200"
 	    	}
 	    ]},
-	    //THREE//////////////////////////
+	//FOUR/////////////////////////////
+	/* Blue/Red particles attract one another */
+	    {"emitters": [
+	    	{
+	    		"draw": "false",
+	    		"keepEmitting": "false",
+	    		"numParts": "100",
+	    		"x": "100",
+	    		"y": "100"
+	    	}
+	    ],
+	    "forceList": [
+	        {
+	        	"add": "false",
+	            "x": "0",
+	            "y": "10"
+	        }
+	    ],
+	    "attractors": [
+	    	{
+	    		"add": "false",
+	    		"x": "400",
+	    		"y": "400",
+	    		"mass": "5",
+	    		"G": "200"
+	    	}
+	    ]},
+	//FIVE////////////////////////////
+	/* Left over particles have mass - back to white */
 	    {"emitters": [
 	    	{
 	    		"draw": "false",
@@ -93,41 +143,24 @@ var states = {
 	    		"y": "100",
 	    		"mass": "5",
 	    		"G": "200"
-	    	}
-	    ]},
-	    //FOUR//////////////////////
-	    {"emitters": [
-	    	{
-	    		"draw": "false",
-	    		"keepEmitting": "false",
-	    		"numParts": "100",
-	    		"x": "100",
-	    		"y": "100"
-	    	}
-	    ],
-	    "forceList": [
-	        {
-	        	"add": "false",
-	            "x": "0",
-	            "y": "10"
-	        }
-	    ],
-	    "attractors": [
-	    	{
-	    		"add": "true",
-	    		"x": "400",
-	    		"y": "400",
-	    		"mass": "5",
-	    		"G": "200"
 	    	},
 	    	{
 	    		"add": "true",
-	    		"x": "100",
-	    		"y": "200",
-	    		"mass": "3",
-	    		"G": "100"
+	    		"x": "400",
+	    		"y": "100",
+	    		"mass": "8",
+	    		"G": "500"
 	    	}
 	    ]}
+	//SIX////////////////////////////
+	/* Left overs begin to attract one another */
+	//SEVEN////////////////////////////
+	/* Some begin to bunch and form bigger particles */
+	//EIGHT////////////////////////////
+	/* Bigger parts attracting one another 
+	and creating points of gravitational pull */
+	//NINE////////////////////////////
+	/* Galaxy */
 	]
 }
 
