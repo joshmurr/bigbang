@@ -94,8 +94,40 @@ var states = {
 	    		"mass": "5",
 	    		"G": "200"
 	    	}
+	    ]},
+	    //FOUR//////////////////////
+	    {"emitters": [
+	    	{
+	    		"draw": "false",
+	    		"keepEmitting": "false",
+	    		"numParts": "100",
+	    		"x": "100",
+	    		"y": "100"
+	    	}
+	    ],
+	    "forceList": [
+	        {
+	        	"add": "false",
+	            "x": "0",
+	            "y": "10"
+	        }
+	    ],
+	    "attractors": [
+	    	{
+	    		"add": "true",
+	    		"x": "400",
+	    		"y": "400",
+	    		"mass": "5",
+	    		"G": "200"
+	    	},
+	    	{
+	    		"add": "true",
+	    		"x": "100",
+	    		"y": "200",
+	    		"mass": "3",
+	    		"G": "100"
+	    	}
 	    ]}
-
 	]
 }
 
@@ -114,7 +146,7 @@ function setState(){
 			break;
 		} else {
 			var ps = s.emitters[b];
-			systems.push(new particleSystem(new vec(+ps.x,+ps.y), +ps.numParts, ps.keepEmitting));
+			systems.unshift(new particleSystem(new vec(+ps.x,+ps.y), +ps.numParts, ps.keepEmitting));
 		}
 	}
 
