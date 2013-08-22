@@ -2,11 +2,11 @@ var can = document.getElementById("canvas");
 var ctx = can.getContext("2d");
 
 var w = can.width, h = can.height;
-var center = new vec(w/4,h/2);
+var center = new vec(w/2,h/2);
 var friction = 0.98;
-var systems = [];
 var st = 0, count = 0;
 var lastLoop = new Date;
+var system = new particleSystem(center, 0, false);
 
 var states = {
 	"states":[
@@ -164,55 +164,37 @@ var states = {
 	]
 }
 
-function setState(){
+function setState(state){
 	//CLEAR FORCES
-	for(var a=0; a<systems.length; a++){
-		systems[a].forces = [];
-		systems[a].attractors = [];
-	}
-
-	var s = states.states[st];
+	system.attractors = [];
 	console.log("Current State: " + st);
 	
-	for(var b=0; b<s.emitters.length; b++){
-		if(s.emitters[b].draw == "false") {
+	switch(state){
+		case 0:
+			system.attractors.push(new attractor(new vec(center.x+1, center.y), 5, 500));
+			system.limit = 1;
 			break;
-		} else {
-			var ps = s.emitters[b];
-			systems.unshift(new particleSystem(new vec(+ps.x,+ps.y), +ps.numParts, ps.keepEmitting));
-		}
+		case 1:
+			system.limit = 50;
+			system.keepEmitting = true;
+			break;
+		case 2:
+			system.colours = 0;
+			break;
+		case 3:
+			console.log("ATTRACT ALL!");
+			system.attractAllBoolean = true;
+			break;
+		default:
+			console.log("De FAULTING");
 	}
 
-	for(var c=0; c<s.forceList.length; c++){
-		if(s.forceList[c].add == "false") {
-			break;
-		} else {
-			for(var d=0; d<systems.length; d++){
-				systems[d].forces.push(new vec(+s.forceList[c].x, +s.forceList[c].y));
-			}
-		}
-	}
-
-	for(var e=0; e<s.attractors.length; e++){
-		var att = s.attractors[e];
-		if(att.add == "false") {
-			break;
-		}
-		else {
-			for(var f=0; f<systems.length; f++){
-				systems[f].attractors.push(new attractor(new vec(+att.x, +att.y), +att.mass, +att.G));
-			}
-		}
-	}
-	if(st<states.states.length-1) st++;
+	if(st<5) st++;
 	else return;
 }
 
 function appendValsToHtml(){
-	for(var i=0; i<systems.length; i++){
-		document.getElementById("s"+i).innerHTML = "System: " + i;
-		document.getElementById("pl"+i).innerHTML = "Particle Count: " + systems[i].particles.length;
-	}
+	document.getElementById("pl").innerHTML = "Particle Count: " + system.particles.length;
 }
 
 function setup(){
@@ -230,7 +212,7 @@ function draw() {
  	appendValsToHtml();
  	//if(systems.length>0 && count % 100 === 0) console.log(systems[0].particles[0].location.x);
  	//count++;
- 	console.log(systems.length);
+ 	//console.log(systems.length);
  	document.getElementById("fps").innerHTML = "FPS: " + fps;
  	lastLoop = thisLoop;
 }

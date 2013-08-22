@@ -1,11 +1,12 @@
-function particle(loc_, acc_, mass_) {
+function particle(loc_, acc_, mass_, colours_) {
   this.mass = mass_, this.G = 1;
   this.location = loc_;
   this.velocity = new vec(0, 0);
   this.acceleration = acc_;
   this.lifeSpan = 255;
   this.dead = false;
-  this.r=0, this.g=0, this.b=0;
+  this.r = this.g = this.b = 0;
+  this.c = colours_;
   this.id = "";
 
   this.applyForce = function (force_) {
@@ -31,9 +32,9 @@ function particle(loc_, acc_, mass_) {
     this.b = Math.floor(Math.random()*255);
   }
 
-  this.setColour = function(state){
-    switch(state) {
-      case 4:
+  this.setColour = function(colour){
+    switch(colour) {
+      case 0:
         var selector = Math.floor(Math.random()*2);
         if(selector == 1){
           this.r = 255;
@@ -47,12 +48,16 @@ function particle(loc_, acc_, mass_) {
           this.id = "blue";
         }
         break;
+      case 1:
+        this.r = 180;
+        this.g = 244;
+        this.b = 10;
+        break;
       default:
         this.r = this.g = this.b = 255;
     }
   }
-
-  this.setColour(st);
+  this.setColour(this.c);
 
   this.draw = function(){
     this.velocity = this.velocity.add(this.acceleration);
@@ -60,8 +65,8 @@ function particle(loc_, acc_, mass_) {
     this.acceleration = this.acceleration.mult(0);
     ctx.beginPath();
 
-    if(st > 4) ctx.fillStyle= "rgba(255,255,255," + map(this.lifeSpan,0,255,0,1)+")";
-    else ctx.fillStyle= "rgba("+this.r+","+this.g+","+this.b+"," + map(this.lifeSpan,0,255,0,1)+")";
+    //if(st > 4) ctx.fillStyle= "rgba(255,255,255," + map(this.lifeSpan,0,255,0,1)+")";
+    ctx.fillStyle= "rgba("+this.r+","+this.g+","+this.b+"," + map(this.lifeSpan,0,255,0,1)+")";
 
     ctx.arc(this.location.x, this.location.y, this.mass, 0, Math.PI*2);
     ctx.fill();

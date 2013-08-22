@@ -1,12 +1,9 @@
 function particleSystem(origin_, numParts, ke_) {
-  //MAYBE ADD 'LIMITER' BOOLEAN TO PARTICLE SYSTEM
-  //IF(LIMITER) LIMIT NUMS
-  //ELSE ADDPARTICLES();
   this.origin = origin_;
-  this.constantLimit = numParts;
-  this.limit = this.constantLimit;
+  this.limit =  numParts;
   this.particles = [], this.forces = [], this.attractors = [];
-  this.finished = false, this.deathToll = 0, this.keepEmitting = ke_, this.stop = false;
+  this.finished = false, this.deathToll = 0, this.keepEmitting = ke_, this.attractAllBoolean = false;
+  this.colours = 999;
 
   this.addBatchParticles = function () {
     for (var i = 0; i < this.limit; i++) {
@@ -14,23 +11,23 @@ function particleSystem(origin_, numParts, ke_) {
     }
   };
 
-  this.addParticles = function(maintain) {
-    if(this.stop == true){
+  this.addParticles = function() {
+    if(this.attractAllBoolean == true){
       return;
     } else {
       if(this.keepEmitting == "false") {
         if (this.limit === 0) {
           return;
         } else {
-          if(st == 1) this.particles.push(new particle(this.origin, new vec((Math.random() * 2) - 1, (Math.random() * 2) - 1), 1));
-          else this.particles.push(new particle(this.origin, new vec((Math.random() * 10) - 5, (Math.random() * 10) - 5), (Math.random()*6)+2));
+          if(st == 1) this.particles.push(new particle(this.origin, new vec((Math.random()*2)-1, (Math.random()*2)-1), 1, this.colours));
+          else this.particles.push(new particle(this.origin, new vec((Math.random()*10)-5, (Math.random()*10)-5), (Math.random()*6)+2, this.colours));
           this.limit--;
         }
       } else {
           if(this.particles.length >= this.limit){
             return;
           } else {
-            this.particles.push(new particle(this.origin, new vec((Math.random() * 4) - 2, (Math.random() * 4) - 2), (Math.random()*6)+2));
+            this.particles.push(new particle(this.origin, new vec((Math.random()*4)-2, (Math.random()*4)-2), (Math.random()*6)+2, this.colours));
         }
       }
     }
@@ -61,13 +58,17 @@ function particleSystem(origin_, numParts, ke_) {
     }
   };
 
+  this.attractAll = function() {
+    
+  }
+
   this.run = function () {
     for (var i = 0; i < this.particles.length; i++) {
       var p = this.particles[i];
 
-      for (var k = 0; k < this.forces.length; k++) {
+      /*for (var k = 0; k < this.forces.length; k++) {
         p.applyForce(this.forces[k]);
-      }
+      }*/
   
       for (var j = 0; j < this.attractors.length; j++) {
         p.applyForce(this.attractors[j].attract(p));
@@ -77,17 +78,17 @@ function particleSystem(origin_, numParts, ke_) {
       this.outOfBounds(p);
       //this.bounceOffEdges(p);
 
-      if(st == 4) {
-        for(var j=0; j<this.particles.length; j++){
-          var p2 = this.particles[j];
-          if(i !== j && p.id !== p2.id){
-            //console.log("Attracting " +i+ " with "+j);
-            var f = p.attract(p2);
-            p.applyForce(f);
+      if(this.attractAllBoolean == true) {
+          for(var j=0; j<this.particles.length; j++){
+            var p2 = this.particles[j];
+            if(i !== j && p.id !== p2.id){
+              //console.log("AA INSIDE!");
+              var f = p.attract(p2);
+              p.applyForce(f);
+            }
           }
-        }
       }
-  
+      
       if (p.lifeSpan <= 1) {
         p.dead = true;
       } else {
@@ -108,27 +109,9 @@ function particleSystem(origin_, numParts, ke_) {
   };
 }
 
-function addParticleSystemMouse(e) {
-  var x = e.x;
-  var y = e.y;
-
-  x -= can.offsetLeft;
-  y -= can.offsetTop;
-
-  var mOrigin = new vec(x, y);
-  systems.unshift(new particleSystem(mOrigin));
-}
-
 function updateParticleSystem() {
-  for (var i = 0; i < systems.length; i++) {
-    var ps = systems[i];
-    if(ps.finished){
-      systems.splice(i, 1);
-    } else {
-      //ctx.fillStyle = "red";
-      //ctx.fillRect(ps.origin.x,ps.origin.y, 3,3);
-      ps.addParticles(i);
-      ps.run();
-    }
-  }
+  //ctx.fillStyle = "red";
+  //ctx.fillRect(ps.origin.x,ps.origin.y, 3,3);
+  system.addParticles();
+  system.run();
 }

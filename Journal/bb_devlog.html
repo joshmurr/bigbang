@@ -39,9 +39,14 @@
 		<p class="entry" id="about"><br>I am trying to build a small web-application to explain the <a href="http://en.wikipedia.org/wiki/Big_Bang" alt="Wiki: Big Bang">Big Bang</a> through simple interactive and animated particle systems.<br><br>It is largely an experiment in Javascript and HTML5 for <a href="http://www.joshmurr.co.uk/" alt="JM">me</a>, transferring some concepts originally learnt in <a href="http://processing.org/" alt="Processing">Processing</a>.</p>
 		<p id="date"></p>
 
+		<!-- ENTRY 9 -->
+		<h2>9. More Progress &mdash; <time datetime="2013-08-22T01:13:57">22.08.13 &mdash; 01:13:57</time></h2>
+		<p class="entry">Turns out the early decisions you make in the framework of your code severely affect the later development. I thought JSON would be a great way to store all the data needed for each state change, however accessing the data in a JSON file can be costly. I didn't really make use of JSON parsing which I'm sure I should have, but any way, I've swapped out the JSON for a simple switch-case setup. I've also eliminated the systems array and settled on just having one particle system, as I will hopefully only be dealing with that one particle system throughout.</p><img src="journal/img/08.png" alt="Attract All 2"><p class="entry">One last side note, adding too many 'console.log()' statements, particularly in something which involves many calculations per frame can be the cause of slow frame rates and delays. That was one thing I learnt the hard way.<br><br>Josh</p>
+		<!---->
+
 		<!-- ENTRY 8 -->
 		<h2>8. Progress &mdash; <time datetime="2013-08-21T14:57:54">21.08.13 &mdash; 14:57:54</time></h2>
-		<p class="entry">Some progress was made today. The last physics based feture was implemented at works fine. The particles can now attract one another with their own gravitational pull. It does however pose some new problems, it involves the browser perfoming many calculation each frame and does slow the frame-rate down to around 20fps (from the desired 30fps) and it clearly noticable. However, progress is progress.</p><img src="journal/img/07.png" alt="Attract All"><p class="entry"><br><br>Josh</p>
+		<p class="entry">Some progress was made today. The last physics based feature was implemented at works fine. The particles can now attract one another with their own gravitational pull. It does however pose some new problems, it involves the browser performing many calculation each frame and does slow the frame-rate down to around 20fps (from the desired 30fps) and it clearly noticeable. However, progress is progress.</p><img src="journal/img/07.png" alt="Attract All"><p class="entry"><br><br>Josh</p>
 		<!---->
 
 		<!-- ENTRY 7 -->
@@ -51,7 +56,7 @@
 
 		<!-- ENTRY 6 -->
 		<h2>6. To Do &mdash; <time datetime="2013-08-14T12:38:52">14.08.13 &mdash; 12:38:52</time></h2>
-		<img src="journal/img/05.png" alt="Loads"><p class="entry">After the hours wasted fixing such a small problem last night, I feel like now I need to bear such things in mind. One such thing is optimisation. This is an application (or whatever it is) which is to be displayed and used in a web browser which <em>has</em> to run in real time&mdash;so dealing with potentially thousands of particles each behaving independantly will mean a lot of calculations the browser needs to perform per frame (currently at 30 frames per second). The above image shows 20 separate particle systems each dealing with 100 particles = 2000 particles. This particular example slowed the browser down considerably. Things to bear in mind:</p>
+		<img src="journal/img/05.png" alt="Loads"><p class="entry">After the hours wasted fixing such a small problem last night, I feel like now I need to bear such things in mind. One such thing is optimisation. This is an application (or whatever it is) which is to be displayed and used in a web browser which <em>has</em> to run in real time&mdash;so dealing with potentially thousands of particles each behaving independently will mean a lot of calculations the browser needs to perform per frame (currently at 30 frames per second). The above image shows 20 separate particle systems each dealing with 100 particles = 2000 particles. This particular example slowed the browser down considerably. Things to bear in mind:</p>
 		<ul>
 			<li>Frame Rate</li>
 			<li><a href="https://developers.google.com/speed/articles/optimizing-javascript" alt="JS Optimization">Class/Function definitions</a> (there are quite a few of those)</li>
@@ -74,7 +79,7 @@
 
 		<!-- ENTRY 3 -->
 		<h2>3. Structure &mdash; <time datetime="2013-08-12T19:18:07">12.08.13 &mdash; 19:18:07</time></h2>
-		<p class="entry">Particles are no long contrained to the canvas itself and can fly on and off the visible area&mdash;this will allow me to make the visible area full-screen. If the particle is off-screen it's "lifeSpan" begins to decrease (yet to spawn a new particle on it's death however). Now I must consider the order of states the particles will go through:
+		<p class="entry">Particles are no long constrained to the canvas itself and can fly on and off the visible area&mdash;this will allow me to make the visible area full-screen. If the particle is off-screen it's "lifeSpan" begins to decrease (yet to spawn a new particle on it's death however). Now I must consider the order of states the particles will go through:
 		<br><br><img src="journal/img/03.png" alt="Particle states">
 		The particles will undergo change in:</p>
 		<ul>
@@ -109,7 +114,7 @@
 		
 		<!-- ENTRY 1 -->
 		<h2>1. Development Log &mdash; <time datetime="2013-08-12T12:58:32">12.08.13 &mdash; 12:58:32</time></h2>
-		<p class="entry">I have decided to document the development of this project on this develpoment log from now on. Working on an exclusively digital project means having a sketchbook to return to every-so-often hinders the speed at which I can work. To fully document the process I want to refer to research material and use imagery, and to print, cut and stick such things is time consuming. Although it has taken me an hour to get this how I want it to look and behave, I feel the time saved will get me that hour back and more. This is also something which can be turned into a physical object at the end of the project.<br><br>Josh</p>
+		<p class="entry">I have decided to document the development of this project on this development log from now on. Working on an exclusively digital project means having a sketchbook to return to every-so-often hinders the speed at which I can work. To fully document the process I want to refer to research material and use imagery, and to print, cut and stick such things is time consuming. Although it has taken me an hour to get this how I want it to look and behave, I feel the time saved will get me that hour back and more. This is also something which can be turned into a physical object at the end of the project.<br><br>Josh</p>
 		<!---->
 	</div>
 	
