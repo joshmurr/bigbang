@@ -4,6 +4,7 @@ function particle(loc_, acc_, mass_, colours_) {
   this.velocity = new vec(0, 0);
   this.acceleration = acc_;
   this.lifeSpan = 255;
+
   this.dead = false;
   this.r = this.g = this.b = 0;
   this.c = colours_;
@@ -24,6 +25,17 @@ function particle(loc_, acc_, mass_, colours_) {
     this.strength = (this.G*this.mass*p.mass)/(this.distance*this.distance);
     this.force = this.force.mult(this.strength);
     return this.force;
+  }
+
+  this.detectCollision = function(p){
+    var dx = p.location.x - this.location.x;
+    var dy = p.location.y - this.location.y;
+    var distSq = dx*dx + dy*dy;
+    if(distSq < (this.mass + p.mass)/2){
+      return true;
+    } else {
+      return false;
+    }
   }
 
   this.setRandomColour = function(){
@@ -49,9 +61,12 @@ function particle(loc_, acc_, mass_, colours_) {
         }
         break;
       case 1:
-        this.r = 180;
-        this.g = 244;
-        this.b = 10;
+        this.r = 255;
+        this.g = 255;
+        this.b = 255;
+        var chars = ["a","b","c","d","e","f","g","h","i","j","k","l"];
+        var word = chars[Math.floor(Math.random()*chars.length)] + chars[Math.floor(Math.random()*chars.length)];
+        this.id = word;
         break;
       default:
         this.r = this.g = this.b = 255;
@@ -59,15 +74,16 @@ function particle(loc_, acc_, mass_, colours_) {
   }
   this.setColour(this.c);
 
-  this.draw = function(){
+  this.draw = function(c){
     this.velocity = this.velocity.add(this.acceleration);
     this.location = this.location.add(this.velocity);
     this.acceleration = this.acceleration.mult(0);
     ctx.beginPath();
-
-    //if(st > 4) ctx.fillStyle= "rgba(255,255,255," + map(this.lifeSpan,0,255,0,1)+")";
+    if(c !== this.c){
+      this.c = c;
+      this.setColour(this.c);
+    }
     ctx.fillStyle= "rgba("+this.r+","+this.g+","+this.b+"," + map(this.lifeSpan,0,255,0,1)+")";
-
     ctx.arc(this.location.x, this.location.y, this.mass, 0, Math.PI*2);
     ctx.fill();
   };

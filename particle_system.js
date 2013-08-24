@@ -1,13 +1,15 @@
 function particleSystem(origin_, numParts, ke_) {
   this.origin = origin_;
+  this.offCent = new vec(this.origin.x+1, this.origin.y+1);
   this.limit =  numParts;
   this.particles = [], this.forces = [], this.attractors = [];
   this.finished = false, this.deathToll = 0, this.keepEmitting = ke_, this.attractAllBoolean = false;
   this.colours = 999;
+  this.collideAndDie = false;
 
   this.addBatchParticles = function () {
-    for (var i = 0; i < this.limit; i++) {
-      this.particles.unshift(new particle(this.origin, new vec((Math.random() * 4) - 2, (Math.random() * 4) - 2), 5));
+    for (var i = 0; i < (100-this.particles.length); i++) {
+      this.particles.push(new particle(this.offCent, new vec((Math.random()*10)-5, (Math.random()*10)-5), (Math.random()*15)+1, this.colours));
     }
   };
 
@@ -78,13 +80,22 @@ function particleSystem(origin_, numParts, ke_) {
       this.outOfBounds(p);
       //this.bounceOffEdges(p);
 
+      var pr = p.mass/2;
       if(this.attractAllBoolean == true) {
           for(var j=0; j<this.particles.length; j++){
             var p2 = this.particles[j];
+            var p2r = p2.mass/2;
             if(i !== j && p.id !== p2.id){
-              //console.log("AA INSIDE!");
               var f = p.attract(p2);
               p.applyForce(f);
+              if(!this.collideAndDie){
+                break;
+              } else {
+                if(p.detectCollision(p2)){
+                  this.particles.splice(i, 1);
+                  this.particles.splice(j, 1);
+                }
+              }
             }
           }
       }
@@ -95,7 +106,7 @@ function particleSystem(origin_, numParts, ke_) {
         p.dead = false;
       }
 
-      p.draw();
+      p.draw(this.colours);
 
       if (p.dead) {
         this.deathToll++;
