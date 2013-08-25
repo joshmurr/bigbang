@@ -67,6 +67,15 @@ em{
 img {
 	width: 100%;
 }
+
+#ribbon {
+	width: 149px;
+	position: fixed; 
+	top: 0; 
+	right: 0; 
+	border: 0;
+}
+
 ul{
 	list-style-type: none;
 	list-style-position: inside;
