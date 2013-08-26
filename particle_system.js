@@ -2,13 +2,22 @@ function particleSystem(origin_, numParts, ke_) {
   this.origin = origin_;
   this.offCent = new vec(this.origin.x+1, this.origin.y+1);
   this.limit =  numParts;
-  this.particles = [], this.forces = [], this.attractors = [];
+  this.particles = [], this.attractors = [];
   this.finished = false, this.deathToll = 0, this.keepEmitting = ke_, this.attractAllBoolean = false;
   this.colours = 999;
   this.collideAndDie = false;
+  this.outOfBoundsAndDie = true;
+
+  this.updateCenter = function(newCenter){
+    this.origin = newCenter;
+    for(var i=0; i<this.attractors.length; i++){
+      this.attractors[i].location = newCenter;
+      this.offCent = new vec(newCenter.x+1, newCenter.y+1);
+    }
+  }
 
   this.addBatchParticles = function () {
-    for (var i = 0; i < (100-this.particles.length); i++) {
+    for (var i = 0; i < this.limit; i++) {
       this.particles.push(new particle(this.offCent, new vec((Math.random()*10)-5, (Math.random()*10)-5), (Math.random()*15)+1, this.colours));
     }
   };
@@ -77,7 +86,7 @@ function particleSystem(origin_, numParts, ke_) {
         //this.attractors[j].draw();
       }
 
-      this.outOfBounds(p);
+      if(this.outOfBoundsAndDie) this.outOfBounds(p);
       //this.bounceOffEdges(p);
 
       var pr = p.mass/2;

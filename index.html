@@ -3,18 +3,27 @@
 <head>
 	<title>The Big Bang</title>
 	<style>
+		*{
+			margin: 0px;
+			padding: 0px;
+		}
 		html{
-			background-color: white;
+			background-color: black;
 		}
 		body {
 			text-align: center;
-			width: 520px;
+			width: 100%;
 			margin-left: auto;
 			margin-right: auto;
 		}
 		canvas {
-			margin: 15px;
-			position: relative;
+			margin: auto;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			z-index: 0;
 		}
 
 		p {
@@ -30,9 +39,11 @@
 			font: 16px monospace;
 			height: 20px;
 			text-align: center;
+			z-index: 1;
 		}
 
 		#startButton{
+			position: absolute;
 			width: 60px;
 			display: inline-block;
 		}
@@ -48,13 +59,15 @@
 		}
 
 		#fps{
+			position: absolute;
 			float: left;
-			
+			color: white;
+			z-index: 2;
 		}
 	</style>
 </head>
 <body>
-	<canvas id="canvas" width="500" height="500"></canvas>
+	<canvas id="canvas"></canvas>
 	<script src="dom_functions.js"></script>
 	<script src="map.js"></script>
 	<script src="vector.js"></script>

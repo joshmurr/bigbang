@@ -1,12 +1,25 @@
 var can = document.getElementById("canvas");
 var ctx = can.getContext("2d");
 
-var w = can.width, h = can.height;
+var w = window.innerWidth/2, h = window.innerHeight/2;
 var center = new vec(w/2,h/2);
-var friction = 0.98;
-var st = 0, count = 0;
-var lastLoop = new Date;
 var system = new particleSystem(center, 0, false);
+var st = 0;
+var lastLoop = new Date;
+
+
+window.addEventListener('resize', resizeCanvas, false);
+
+function resizeCanvas(){
+	w = can.width = window.innerWidth;
+	h = can.height = window.innerHeight;
+	center = new vec(w/2,h/2);
+	if(st === 0){
+		system = new particleSystem(center, 0, false);
+		return;
+	}
+	system.updateCenter(center);
+}
 
 function setState(state){
 	console.log("Current State: " + st);
@@ -24,6 +37,7 @@ function setState(state){
 			system.colours = 0;
 			break;
 		case 3:
+			system.outOfBoundsAndDie = false;
 			system.attractAllBoolean = true;
 			system.collideAndDie = true;
 			break;
@@ -33,8 +47,16 @@ function setState(state){
 			system.attractors.push(new attractor(center, 5, 500));
 			break;
 		case 5:
+			system.updateCenter(center);
 			system.limit = 100;
 			if(system.particles.length<100){
+				system.addBatchParticles();
+			}
+			break;
+		case 6:
+			system.updateCenter(center);
+			system.limit = 200;
+			if(system.particles.length<system.limit){
 				system.addBatchParticles();
 			}
 			break;
@@ -44,23 +66,22 @@ function setState(state){
 	st++;
 }
 
-function appendValsToHtml(){
-	document.getElementById("pl").innerHTML = "Particle Count: " + system.particles.length;
-}
-
 function setup(){
+	resizeCanvas();
 	hide("startButton");
 	setState(st);
 	show("stateButton");
+	can.setAttribute("onclick","setState(st)");
 }
 
 function draw() {
+	if(st === 0) resizeCanvas();
 	var thisLoop = new Date;
 	var fps = Math.floor(1000/(thisLoop - lastLoop));
   	ctx.fillStyle = "black";
  	ctx.fillRect(0, 0, w, h);
  	updateParticleSystem();
- 	appendValsToHtml();
+ 	document.getElementById("pl").innerHTML = "Particle Count: " + system.particles.length;
  	document.getElementById("fps").innerHTML = "FPS: " + fps;
  	lastLoop = thisLoop;
 }

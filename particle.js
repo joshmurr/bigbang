@@ -61,9 +61,7 @@ function particle(loc_, acc_, mass_, colours_) {
         }
         break;
       case 1:
-        this.r = 255;
-        this.g = 255;
-        this.b = 255;
+        this.r = this.g = this.b = Math.floor((Math.random()*255)+100);
         var chars = ["a","b","c","d","e","f","g","h","i","j","k","l"];
         var word = chars[Math.floor(Math.random()*chars.length)] + chars[Math.floor(Math.random()*chars.length)];
         this.id = word;
