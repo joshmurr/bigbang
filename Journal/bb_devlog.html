@@ -40,6 +40,17 @@
 		<p class="entry" id="about"><br>I am trying to build a small web-application to explain the <a href="http://en.wikipedia.org/wiki/Big_Bang" alt="Wiki: Big Bang">Big Bang</a> through simple interactive and animated particle systems.<br><br>It is largely an experiment in Javascript and HTML5 for <a href="http://www.joshmurr.co.uk/" alt="JM">me</a>, transferring some concepts originally learnt in <a href="http://processing.org/" alt="Processing">Processing</a>.</p>
 		<p id="date"></p>
 
+		<!-- ENTRY 13 -->
+		<h2>13. Things to Think About &mdash; <time datetime="2013-08-28T14:42:26">28.08.13 &mdash; 14:42:26</time></h2>
+		<iframe src="http://www.youtube.com/embed/q3MWRvLndzs" width="100%" height="325" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+		<p class="entry"><a href="http://www.brainpickings.org/">Brainpickings</a> posted about <a href="http://www.brainpickings.org/index.php/2013/08/26/science-religion-and-the-big-bang-minute-physics/?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed%3A+brainpickings%2Frss+%28Brain+Pickings%29">the video above</a> not too long ago and upon watching it I'm starting to become aware of the trappings of my attempt to explain the Big Bang. Although, ultimately, this project was always an excuse for me to learn a lot more about Javascript and about web development generally, it does still need to fulfil a purpose. The video above, I think, does this in a very simple way&mdash;simpler than what I am going for. It also goes into a lot more depth, and almost forces me to re-think my explanation of the Big Bang... The Big Bang is not exactly a simple thing, perhaps my simpler version could be targeted to children? Or as a primer to those interested in the Big Bang and physics&mdash;perhaps 11 to 15-year-olds in school?<br><br>Either way, as soon as I can, I need to really analyse how well the website functions and be concious of how well it does its job. Perhaps there could be some testing with a particular audience involved?<br><br>Josh</p>
+		<!---->
+
+		<!-- ENTRY 12 -->
+		<h2>12. Full Screen &mdash; <time datetime="2013-08-28T14:28:16">28.08.13 &mdash; 14:28:16</time></h2>
+		<img src="journal/img/11.png" alt="Full Screen"/><p class="entry">We are now full screen. It was surprising how much re-scaling the window messes with the code. In hindsight it shouldn't have been, because the particles are located and drawn in relation the the window itself, so of course, if you mess with the reference point, the mess with everything which uses that reference. Any way, working now. Next is to add the text elements which will do the actual explaining. The goal with that is to keep it as minimal an unobtrusive as possible.<br><br>Also there is now a fancy 'Fork Me' ribbon on the top-right of this page thanks to Tom Preston-Werner (<a href="https://github.com/mojombo">mojombo</a>) which he kindly shared <a href="https://github.com/blog/273-github-ribbons">here</a>.<br><br>Josh</p>
+		<!---->
+
 		<!-- ENTRY 11 -->
 		<h2>11. Some Inspiration &mdash; <time datetime="2013-08-25T11:34:27">25.08.13 &mdash; 11:34:27</time></h2>
 		<p class="entry">This has mainly been a technical log so far, so a note on some inspiration is in order. First of all <a href="http://hereistoday.com/" alt="Here Is Today">Here Is Today</a>.</p><img src="journal/img/09.png" alt="Here Is Today img"/><p class="entry"><em>Here Is Today</em> is a very simple web application written in JavaScript which puts into context the scale of time, using Today as the reference point. As the user clicks (only interaction), Today shrinks as it is engulfed by larger time-scales which are animated in. The interactive element is very simple, as is the animation, but I think therein lies its beauty. It does not really seek to explain much, merely contextualize time and it does so thanks to the simple UI.<br><br>Another similar website is <a href="http://htwins.net/scale2/" alt="The Scale of the Univers 2">The Scale of the Universe 2</a>.</p><img src="journal/img/10.png" alt="The Scale of the Universe 2"/><p class="entry"><em>The Scale of the Universe</em> again has very simple UI, a simple scroll bar which alters the scale of a number of objects which surround a human being&mdash;the reference point.<br><br>With my Big Bang app/website (I'm still not sure what I can call it) I want to do something similar. Keep the UI very simple, make the visuals interesting and engaging, but hopefully explain something through that. I do not intend to break down the Big Bang into every minute detail, just merely give the infamous Big Bang some sort of relevance to someone who knew nothing about it before&mdash;children included.<br><br>Josh</p>
@@ -107,20 +118,15 @@
 
 		<!-- ENTRY 2 -->
 		<h2>2. Where I Am Now &mdash; <time datetime="2013-08-12T13:06:44">12.08.13 &mdash; 13:06:44</time></h2>
-		<p class="entry">The idea for this project was to return to a video I made which was an attempt to explain the Big Bang to be displayed on the moving-image posters found alongside the escalators on the London Underground:
-		<br><br>
+		<p class="entry">The idea for this project was to return to a video I made which was an attempt to explain the Big Bang to be displayed on the moving-image posters found alongside the escalators on the London Underground:</p>
 		<iframe src="http://player.vimeo.com/video/66117077" width="100%" height="702" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-		<br><br>
-		The particles systems in this case were made in Processing, exported frame-by-frame and then recomposed in After Effects with text. I have since learnt a lot more in the way of web-development and so for this project I decided to try and recreate the same series of particle effects but in real-time with added interactive elements using Javascript and HTML5.
-		<br><br>
-		Progress has been reasonable and developments have been made daily. Currently the particle systems work efficiently and I can manipulate the forces applied (gravity, points of attraction, etc.). To gain a level of interaction I would like the forces to change but the particles to remain, rather than creating a new set of particles for each stage in the explanation&mdash;to create smoother transitions and to make it more fun to click through. In the picture below you can see that one of two forces can be added by clicking the buttons.
-		<br>
+		<p class="entry">
+		The particles systems in this case were made in Processing, exported frame-by-frame and then recomposed in After Effects with text. I have since learnt a lot more in the way of web-development and so for this project I decided to try and recreate the same series of particle effects but in real-time with added interactive elements using Javascript and HTML5.<br><br>Progress has been reasonable and developments have been made daily. Currently the particle systems work efficiently and I can manipulate the forces applied (gravity, points of attraction, etc.). To gain a level of interaction I would like the forces to change but the particles to remain, rather than creating a new set of particles for each stage in the explanation&mdash;to create smoother transitions and to make it more fun to click through. In the picture below you can see that one of two forces can be added by clicking the buttons.
+		</p>
 		<img src="journal/img/01.png" alt="Clickable forces">
-		<br>
-		Now, I am beginning to added state-by-state transitions which click through one-by-one. The 'Change' button progresses to the next state. All states will be held in a JSON file, each state holding a list of forces to be applied, location and strength of attractors/repellors and so on. This means the particles currently on the canvas can be kept.
-		<br>
+		<p class="entry">Now, I am beginning to added state-by-state transitions which click through one-by-one. The 'Change' button progresses to the next state. All states will be held in a JSON file, each state holding a list of forces to be applied, location and strength of attractors/repellors and so on. This means the particles currently on the canvas can be kept.<p/>
 		<img src="journal/img/02.png" alt="Click through states">
-		<br>Josh</p>
+		<p class="entry"><br><br>Josh</p>
 		<!---->
 		
 		<!-- ENTRY 1 -->

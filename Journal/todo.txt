@@ -1,0 +1,5 @@
+Sort out particle colours:
+	Fade into each colour change using do/while loops?
+	May need to implement this.r1 and this.r2. The set colour function will set the colour but then
+	call another function to check the difference between r1 and r2 and inccrement or decrement
+	accordingly.	
