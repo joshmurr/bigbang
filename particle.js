@@ -47,6 +47,10 @@ function particle(loc_, acc_, mass_, colours_) {
   this.setColour = function(colour){
     switch(colour) {
       case 0:
+        this.r = Math.floor((Math.random()*255)+100);
+        this.g = this.b = 0;
+        break;
+      case 1:
         var selector = Math.floor(Math.random()*2);
         if(selector == 1){
           this.r = 255;
@@ -60,7 +64,7 @@ function particle(loc_, acc_, mass_, colours_) {
           this.id = "blue";
         }
         break;
-      case 1:
+      case 2:
         this.r = this.g = this.b = Math.floor((Math.random()*255)+100);
         var chars = ["a","b","c","d","e","f","g","h","i","j","k","l"];
         var word = chars[Math.floor(Math.random()*chars.length)] + chars[Math.floor(Math.random()*chars.length)];

@@ -18,7 +18,7 @@ function particleSystem(origin_, numParts, ke_) {
 
   this.addBatchParticles = function () {
     for (var i = 0; i < this.limit; i++) {
-      this.particles.push(new particle(this.offCent, new vec((Math.random()*10)-5, (Math.random()*10)-5), (Math.random()*15)+1, this.colours));
+      this.particles.push(new particle(new vec(Math.random()*w, Math.random()*h), new vec((Math.random()*2)-1, (Math.random()*2)-1), (Math.random()*15)+1, this.colours));
     }
   };
 

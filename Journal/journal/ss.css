@@ -87,6 +87,18 @@ ul li{
 	text-align: left;
 	font: 1.2em AGLI;
 }
+
+ol{
+	list-style-position: outside;
+	padding: 10px;
+	padding-left: 30px;
+}
+
+ol li{
+	text-align: left;
+	font: 1.2em AGLI;
+}
+
 a{
 	color: #000;
 	text-decoration: none;

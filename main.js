@@ -7,7 +7,6 @@ var system = new particleSystem(center, 0, false);
 var st = 0;
 var lastLoop = new Date;
 
-
 window.addEventListener('resize', resizeCanvas, false);
 
 function resizeCanvas(){
@@ -22,43 +21,68 @@ function resizeCanvas(){
 }
 
 function setState(state){
+	var text = document.getElementById("text");
 	console.log("Current State: " + st);
 	switch(state){
 		case 0:
+			text.style.fontSize = "18px";
+			text.innerHTML = "It all starts with a LOT of energy in a small amount of space";
 			system.attractors.push(new attractor(new vec(center.x+1, center.y), 5, 500));
 			system.limit = 1;
 			break;
 		case 1:
-			system.attractors = [];
-			system.limit = 50;
-			system.keepEmitting = true;
+			text.innerHTML = "All Energy / Nothing";
 			break;
 		case 2:
+			text.innerHTML = "Unknown, unstable conditions means the energy can no logner be contained. The BIG BANG";
+			system.attractors = [];
 			system.colours = 0;
+			system.limit = 100;
+			system.keepEmitting = true;
 			break;
 		case 3:
+			text.innerHTML = "Energy fills space and time at extrememly high speeds"
+			break;
+		case 4:
+			text.innerHTML = "At such high temperatures and speeds, energy can turn into mass [E = MC^2]";
+			break;
+		case 5:
+			text.innerHTML = "Mass is either Matter or Anti-Matter";
+			system.colours = 1;
+			break;
+		case 6:
+			text.innerHTML = "Matter and Anti-Matter attract, annihilating one another on collision";
 			system.outOfBoundsAndDie = false;
 			system.attractAllBoolean = true;
 			system.collideAndDie = true;
 			break;
-		case 4:
-			system.colours = 1;
+		case 7:
+			text.innerHTML = "Some particles are left over";
+			system.colours = 2;
 			system.collideAndDie = false;
 			system.attractors.push(new attractor(center, 5, 500));
 			break;
-		case 5:
+		case 8:
+			text.innerHTML = "These particles go on to form the building blocks of the universe";
+			break;
+		case 9:
+			
 			system.updateCenter(center);
 			system.limit = 100;
 			if(system.particles.length<100){
 				system.addBatchParticles();
 			}
 			break;
-		case 6:
+		case 10:
+			system.attractors = [];
 			system.updateCenter(center);
 			system.limit = 200;
 			if(system.particles.length<system.limit){
 				system.addBatchParticles();
 			}
+			break;
+		case 11:
+			system.attractors.push(new attractor(new vec(center.x+1, center.y), 5, 500));
 			break;
 		default:
 			console.log("De FAULTING");
@@ -68,9 +92,8 @@ function setState(state){
 
 function setup(){
 	resizeCanvas();
-	hide("startButton");
+	document.getElementById("text").onclick = "";
 	setState(st);
-	show("stateButton");
 	can.setAttribute("onclick","setState(st)");
 }
 

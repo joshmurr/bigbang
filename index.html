@@ -2,69 +2,7 @@
 <html>
 <head>
 	<title>The Big Bang</title>
-	<style>
-		*{
-			margin: 0px;
-			padding: 0px;
-		}
-		html{
-			background-color: black;
-		}
-		body {
-			text-align: center;
-			width: 100%;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		canvas {
-			margin: auto;
-			position: absolute;
-			top: 0px;
-			left: 0px;
-			right: 0px;
-			bottom: 0px;
-			z-index: 0;
-		}
-
-		p {
-			font: 12px sans-serif;
-			float: left;
-			display: inline-block;
-		}
-
-		.button{
-			background-color: #0000AA;
-			color: #0099FF;
-			padding-top: 2px;
-			font: 16px monospace;
-			height: 20px;
-			text-align: center;
-			z-index: 1;
-		}
-
-		#startButton{
-			position: absolute;
-			width: 60px;
-			display: inline-block;
-		}
-
-		#stateButton{
-			width: 70px;
-			display: none;
-		}
-
-		#stateButtonTwo {
-			width: 85px;
-			display: none;
-		}
-
-		#fps{
-			position: absolute;
-			float: left;
-			color: white;
-			z-index: 2;
-		}
-	</style>
+	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 	<canvas id="canvas"></canvas>
@@ -75,8 +13,8 @@
 	<script src="particle_system.js"></script>
 	<script src="attractor.js"></script>
 	<script src="main.js"></script>
-	<div id="startButton" class="button" onclick="setup();">START</div>
-	<div id="stateButton" class="button" onclick="setState(st);">CHANGE</div><br>
+	<div id="text" onclick="setup();">The Big Bang</div>
+	<!--<div id="startButton" class="button" >START</div>-->
 	<p id="fps"></p><br>
 	<p id="pl"></p><br>
 	<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
