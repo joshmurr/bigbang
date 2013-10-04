@@ -1,6 +1,6 @@
 @font-face{
 	font-family: LetterGothicStdBold;
-	src: url("fonts/LetterGothicStd-Bold.otf");
+	src: url("fonts/Quicksand_Book.otf");
 }
 
 *{
@@ -54,16 +54,17 @@ p {
 }
 #fps{
 	position: absolute;
-	top: 50px;
+	top: 0px;
 	left: 0px;
 	color: white;
 	z-index: 2;
 }
-#text {
+.text {
 	font-family: LetterGothicStdBold, monospace;
 	font-size: 24px;
+	line-height: 26px;
 	position: relative;
-	width: 400px;
+	width: 350px;
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 400px;

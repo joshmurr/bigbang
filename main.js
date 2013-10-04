@@ -22,6 +22,7 @@ function resizeCanvas(){
 
 function setState(state){
 	var text = document.getElementById("text");
+	var text2 = document.getElementById("text2");
 	console.log("Current State: " + st);
 	switch(state){
 		case 0:
@@ -31,22 +32,29 @@ function setState(state){
 			system.limit = 1;
 			break;
 		case 1:
-			text.innerHTML = "All Energy / Nothing";
+			text.style.top = "-30px";
+			text.innerHTML = "&uarr;<br>All Energy<br><br>Nothing<br>&darr;";
 			break;
 		case 2:
-			text.innerHTML = "Unknown, unstable conditions means the energy can no logner be contained. The BIG BANG";
+			text.style.top = "0px";
+			text.innerHTML = "Unknown, unstable conditions means the energy can no logner be contained...";
+			text2.style.top = "5px;"
+			text2.innerHTML = "The BIG BANG"
 			system.attractors = [];
 			system.colours = 0;
 			system.limit = 100;
 			system.keepEmitting = true;
 			break;
 		case 3:
-			text.innerHTML = "Energy fills space and time at extrememly high speeds"
+			text2.innerHTML = "";
+			text.innerHTML = "Energy fills space and time at extremely high speeds"
 			break;
 		case 4:
-			text.innerHTML = "At such high temperatures and speeds, energy can turn into mass [E = MC^2]";
+			text.innerHTML = "At such high temperatures and speeds, energy can turn into mass";
+			text2.innerHTML = "E = MC&sup2;"
 			break;
 		case 5:
+			text2.innerHTML = "";
 			text.innerHTML = "Mass is either Matter or Anti-Matter";
 			system.colours = 1;
 			break;
