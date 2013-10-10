@@ -1,6 +1,6 @@
 @font-face{
-	font-family: LetterGothicStdBold;
-	src: url("fonts/Quicksand_Book.otf");
+	font-family: QuicksandBook;
+	src: url("Quicksand_Book.otf");
 }
 
 *{
@@ -60,14 +60,14 @@ p {
 	z-index: 2;
 }
 .text {
-	font-family: LetterGothicStdBold, monospace;
-	font-size: 24px;
+	font-family: QuicksandBook, monospace;
 	line-height: 26px;
 	position: relative;
 	width: 350px;
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 400px;
+	margin-top: 550px;
+	margin-bottom: auto;
 	z-index: 3;
 	color: #FF0;
 }

@@ -70,6 +70,9 @@ function particle(loc_, acc_, mass_, colours_) {
         var word = chars[Math.floor(Math.random()*chars.length)] + chars[Math.floor(Math.random()*chars.length)];
         this.id = word;
         break;
+      case 3:
+        this.r = this.g = this.b = 255;
+        break;
       default:
         this.r = this.g = this.b = 255;
     }

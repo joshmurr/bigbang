@@ -27,19 +27,25 @@ function setState(state){
 	switch(state){
 		case 0:
 			text.style.fontSize = "18px";
+			text2.style.fontSize = "18px";
 			text.innerHTML = "It all starts with a LOT of energy in a small amount of space";
+			text.style.width = "350px";
+			text.style.border = "none";
+			text.style.marginTop = "550px";
 			system.attractors.push(new attractor(new vec(center.x+1, center.y), 5, 500));
 			system.limit = 1;
 			break;
 		case 1:
-			text.style.top = "-30px";
-			text.innerHTML = "&uarr;<br>All Energy<br><br>Nothing<br>&darr;";
+			text.style.top = "-180px";
+			text.innerHTML = "&uarr;<br>All Energy";
+			text2.style.top = "-1050px";
+			text2.innerHTML = "Nothing<br>&darr;";
 			break;
 		case 2:
 			text.style.top = "0px";
 			text.innerHTML = "Unknown, unstable conditions means the energy can no logner be contained...";
-			text2.style.top = "5px;"
-			text2.innerHTML = "The BIG BANG"
+			text2.style.top = "-1050px";
+			text2.innerHTML = "The BIG BANG";
 			system.attractors = [];
 			system.colours = 0;
 			system.limit = 100;
@@ -51,7 +57,7 @@ function setState(state){
 			break;
 		case 4:
 			text.innerHTML = "At such high temperatures and speeds, energy can turn into mass";
-			text2.innerHTML = "E = MC&sup2;"
+			text2.innerHTML = "E = MC^2";
 			break;
 		case 5:
 			text2.innerHTML = "";
@@ -74,23 +80,45 @@ function setState(state){
 			text.innerHTML = "These particles go on to form the building blocks of the universe";
 			break;
 		case 9:
-			
+			text.innerHTML = "Gravity causes the particles with mass to attract one another and interact";
 			system.updateCenter(center);
 			system.limit = 100;
 			if(system.particles.length<100){
-				system.addBatchParticles();
+				system.addBatchParticles(5);
 			}
 			break;
 		case 10:
+			text.innerHTML = "Systems begin to emerge which have an overall gravitational pull";
 			system.attractors = [];
+			system.attractors.push(new attractor(new vec(Math.random()*w, Math.random()*h), 5, 500));
+			system.attractors.push(new attractor(new vec(Math.random()*w, Math.random()*h), 5, 500));
 			system.updateCenter(center);
 			system.limit = 200;
 			if(system.particles.length<system.limit){
-				system.addBatchParticles();
+				system.addBatchParticles(2);
 			}
 			break;
 		case 11:
-			system.attractors.push(new attractor(new vec(center.x+1, center.y), 5, 500));
+			text.innerHTML = "These systems go on to become larger systems like stars";
+			system.attractors = [];
+			system.colours = 3;
+			system.updateCenter(center);
+			system.colours = 100;
+			break;
+		case 12:
+			text.innerHTML = "Floating through space, part of a bigger system"
+			system.limit = 100;
+			system.keepEmitting = true;
+			break;
+		case 13:
+			text.innerHTML = "We call the universe, and the world we live on..."
+			break;
+		case 14:
+			text.innerHTML = "";
+			break;
+		case 15:
+			text.innerHTML = "Made by Josh Murr"
+			text2.innerHTML = "The BIG BANG";
 			break;
 		default:
 			console.log("De FAULTING");
